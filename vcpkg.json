@@ -1,0 +1,9 @@
+{
+  "name": "nvseplugin",
+  "version": "1",
+  "dependencies": [
+    "fmt",
+    "detours",
+    "simpleini"
+  ]
+}
