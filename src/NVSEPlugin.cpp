@@ -3,9 +3,9 @@
 
 #include <NVSE/PluginAPI.h>
 
-extern "C" __declspec(dllexport) const char* NAME = "Clouds Upgrade NVSE";
+extern "C" __declspec(dllexport) const char* NAME = "Cloud Upgrade NVSE";
 
-extern "C" __declspec(dllexport) const char* DESCRIPTION = "by doodlez.\n";
+extern "C" __declspec(dllexport) const char* DESCRIPTION = "by doodlez, Wall_SoGB, and lStewieAl.\n";
 
 HMODULE hModuleBackup;
 
