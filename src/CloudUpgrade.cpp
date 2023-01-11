@@ -1,4 +1,4 @@
-#include "CloudsUpgrade.h"
+#include "CloudUpgrade.h"
 
 #include <SimpleIni.h>
 
@@ -7,7 +7,7 @@ float naive_lerp(float a, float b, float t)
 	return a + t * (b - a);
 }
 
-void CloudsUpgrade::UpdateCloud(int a_layer, float a_timePassed, float a_noise)
+void CloudUpgrade::UpdateCloud(int a_layer, float a_timePassed, float a_noise)
 {
 	if (auto sky = TES::GetSingleton()->sky) {
 		if (auto clouds = sky->clouds) {
@@ -123,7 +123,7 @@ extern HMODULE hModuleBackup;
 
 static void    DisplaySettings(reshade::api::effect_runtime*)
 {
-	auto clouds = CloudsUpgrade::GetSingleton();
+	auto clouds = CloudUpgrade::GetSingleton();
 
 	ImGui::InputFloat("Global Speed", &clouds->speed);
 	ImGui::InputFloat("Global Max Speed", &clouds->maxSpeed);
@@ -137,7 +137,7 @@ static void    DisplaySettings(reshade::api::effect_runtime*)
 	}
 }
 
-void CloudsUpgrade::Update()
+void CloudUpgrade::Update()
 {
 	if (!init) {
 		init = true;
@@ -180,19 +180,19 @@ UInt32 originalCloudsUpdateAddr;
 void __fastcall CloudsUpdateHook(Clouds* clouds, void* edx, Sky* sky, float value)
 {
 	ThisCall(originalCloudsUpdateAddr, clouds, sky, value);
-	CloudsUpgrade::GetSingleton()->Update();
+	CloudUpgrade::GetSingleton()->Update();
 }
 
-void CloudsUpgrade::InstallHooks()
+void CloudUpgrade::InstallHooks()
 {
 	originalCloudsUpdateAddr = DetourVtable(kVtbl_Clouds + 0xC, UInt32(CloudsUpdateHook));
 }
 
-void CloudsUpgrade::LoadINI()
+void CloudUpgrade::LoadINI()
 {
 	CSimpleIniA                        ini;
 	ini.SetUnicode();
-	ini.LoadFile(L"Data\\NVSE\\Plugins\\CloudsUpgrade.ini");
+	ini.LoadFile(L"Data\\NVSE\\Plugins\\CloudUpgrade.ini");
 
 	speed = (float)ini.GetDoubleValue("Global", "Speed", speed);
 	maxSpeed = (float)ini.GetDoubleValue("Global", "MaxSpeed", maxSpeed);

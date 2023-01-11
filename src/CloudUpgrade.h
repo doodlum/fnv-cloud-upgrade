@@ -4,7 +4,7 @@
 
 #include <PerlinNoise.hpp>
 
-class CloudsUpgrade
+class CloudUpgrade
 {
 public:
 	static void InstallPatches()
@@ -12,10 +12,10 @@ public:
 		Patches::Install();
 	}
 
-	static CloudsUpgrade* GetSingleton()
+	static CloudUpgrade* GetSingleton()
 	{
-		static CloudsUpgrade control;
-		return &control;
+		static CloudUpgrade singleton;
+		return &singleton;
 	}
 
 	struct CloudSettings
@@ -52,15 +52,16 @@ public:
 
 private:
 
-	CloudsUpgrade() {
+	CloudUpgrade()
+	{
 		noise = siv::PerlinNoise{ 0 };
-		speed = 500.0;
-		maxSpeed = 2.5;
-		volatility = 5.0;
-		layers[0] = { siv::PerlinNoise{ 1 }, 0.2, 0.2 };
-		layers[1] = { siv::PerlinNoise{ 2 }, 1.0, 0.3 };
-		layers[2] = { siv::PerlinNoise{ 3 }, 0.7, 0.4 };
-		layers[3] = { siv::PerlinNoise{ 4 }, 0.3, 0.5 };
+		speed = 0.0;
+		maxSpeed = 0.0;
+		volatility = 0.0;
+		layers[0] = { siv::PerlinNoise{ 1 }, 0.0, 0.0 };
+		layers[1] = { siv::PerlinNoise{ 2 }, 0.0, 0.0 };
+		layers[2] = { siv::PerlinNoise{ 3 }, 0.0, 0.0 };
+		layers[3] = { siv::PerlinNoise{ 4 }, 0.0, 0.0 };
 		LoadINI();
 	}
 };

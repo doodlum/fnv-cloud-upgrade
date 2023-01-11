@@ -1,11 +1,11 @@
 #include "Patches.h"
-#include "CloudsUpgrade.h"
+#include "CloudUpgrade.h"
 
 namespace Patches
 {
 	void Patches::Install()
 	{
-		CloudsUpgrade::InstallPatches();
+		CloudUpgrade::InstallPatches();
 		PrintLog("Installed all patches");
 	}
 }
